@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { filterByQuery, findById, createNewNote, validateNote } = require('../lib/notes');
+const { filterByQuery, findById, createNewNote, validateNote, deleteNote } = require('../lib/notes');
 const { notes } = require('../data/db.json');
 
 router.get('/notes', (req, res) => {
@@ -20,12 +20,25 @@ router.get('/notes/:id', (req, res) => {
 })
 
 router.post('/notes', (req, res) => {
-    req.body.id = notes.length.toString();
+    //get latest note's id num
+    const lastIdNum = notes.length -1;
+    const lastId = notes[lastIdNum].id;
+    //increment above that to allow deleting of notes
+    req.body.id = lastId + 1;
     if (!validateNote(req.body)) {
         res.status(400).send('The note is not properly formatted.');
     } else {
         const note = createNewNote(req.body, notes);
         res.json(note);
+    }
+});
+
+router.delete('/notes/:id', (req, res) => {
+    const result = deleteNote(req.params.id, notes);
+    if (result) {
+        res.json(result);
+    } else {
+        res.send(500).json({ message: 'Server error.' });
     }
 });
 
