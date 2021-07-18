@@ -25,10 +25,10 @@ Designed and written by Tony Huang
 
 ## Final Result
 Main landing page
-<img src='' alt=''/>
+<img src='./assets/images/MainLandingPage.jpg' alt='Main Landing Page'/>
 
 Stored notes and entry field
-<img src='' alt=''/>
+<img src='./assets/images/StoredNotes_EntryField.jpg' alt='All stored notes and new note field'/>
 
 Sample JSON data
-<img src='' alt=''/>
+<img src='./assets/images/StoredJSON.jpg' alt='Sample of stored data in JSON format'/>
