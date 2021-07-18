@@ -1,42 +1,31 @@
-const {
-    filterByQuery,
-    createNewNote,
-    validateNote,
-    findById
-} = require('../lib/notes');
 const router = require('express').Router();
-const { data } = require('../data/db');
+const { filterByQuery, findById, createNewNote, validateNote } = require('../lib/notes');
+const { notes } = require('../data/db.json');
 
-//reads db.json and returns all saved notes as JSON
 router.get('/notes', (req, res) => {
-    let notes = data;
+    let results = notes;
     if (req.query) {
-        notes = filterByQuery(req.query, notes)
+        results = filterByQuery(req.query, results);
     }
-    res.json(notes);
+    res.json(results);
 });
 
-//receives new note data to be added to db.json file
-router.post('/notes', (req, res) => {
-    req.body.id = data.length.toString();
-
-    //verify validity of data
-    if (!validateNote(req.body)) {
-        res.status(400).send('Note has not been properly formatted');
-    } else {
-        const note = createNewNote(req.body, data);
-
-        res.json(note);
-    }
-});
-
-//allows user to delete stored notes
-router.delete('/notes/:id', (req, res) => {
-    const note = findById(req.params.id, notes);
-    if (note) {
-
+router.get('/notes/:id', (req, res) => {
+    const result = findById(req.params.id, notes);
+    if (result) {
+        res.json(result);
     } else {
         res.send(404);
+    }
+})
+
+router.post('/notes', (req, res) => {
+    req.body.id = notes.length.toString();
+    if (!validateNote(req.body)) {
+        res.status(400).send('The note is not properly formatted.');
+    } else {
+        const note = createNewNote(req.body, notes);
+        res.json(note);
     }
 });
 
