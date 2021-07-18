@@ -9,11 +9,11 @@ const { data } = require('../data/db');
 
 //reads db.json and returns all saved notes as JSON
 router.get('/notes', (req, res) => {
-    // let notes = data;
-    // if (req.query) {
-    //     notes = filterByQuery(req.query, notes)
-    // }
-    res.json(data);
+    let notes = data;
+    if (req.query) {
+        notes = filterByQuery(req.query, notes)
+    }
+    res.json(notes);
 });
 
 //receives new note data to be added to db.json file
