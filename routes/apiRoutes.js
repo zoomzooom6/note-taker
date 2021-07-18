@@ -15,13 +15,13 @@ router.get('/notes/:id', (req, res) => {
     if (result) {
         res.json(result);
     } else {
-        res.send(404);
+        res.sendStatus(404);
     }
 })
 
 router.post('/notes', (req, res) => {
     //get latest note's id num
-    const lastIdNum = notes.length -1;
+    const lastIdNum = notes.length - 1;
     const lastId = notes[lastIdNum].id;
     //increment above that to allow deleting of notes
     req.body.id = lastId + 1;
@@ -38,7 +38,7 @@ router.delete('/notes/:id', (req, res) => {
     if (result) {
         res.json(result);
     } else {
-        res.send(500).json({ message: 'Server error.' });
+        res.sendStatus(400);
     }
 });
 
