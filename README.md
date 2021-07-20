@@ -1,7 +1,7 @@
 # Note Taker Starter Code
 The purpose of this challenge is to design a backend server using Express.js that allows a user to perform CRUD operations on notes. Note data stored as JSON file and application hosted on Heroku.
 
-### Deployed on [Heroku](https://note-taker-express-week11.herokuapp.com/notes)
+### Deployed on [Heroku](https://note-taker-express-week11.herokuapp.com/)
 
 ## Table of Contents
 * [Criteria](#criteria)
